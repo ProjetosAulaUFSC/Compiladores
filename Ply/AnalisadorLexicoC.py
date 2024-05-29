@@ -1,6 +1,5 @@
 # ATIVIDADE PRÁTICA - reconhecedor de estruturas em C - 19102191
 from ply import *
-import logging
 
 reserved = {
     'break'     : 'BREAK',
@@ -109,18 +108,9 @@ def t_ID(t):
     t.type = reserved.get(t.value,'VARIABLE')    
     return t
 
-yacc.yacc()
-
-logging.basicConfig(
-    level=logging.INFO,
-    filename="parselog.txt"
-)
-
 file = open("input.txt",'r')
 data = file.read()
 lexer.input(data)
 
 for tok in lexer:
     print(tok)
-
-yacc.parse(data, debug=logging.getLogger())
