@@ -1,6 +1,29 @@
 from ply import yacc
 from lexer import tokens
 
+def p_include_block(p):
+    '''include_block : INCLUDE HEADER SEMICOLON include_block
+                     | empty'''
+    pass
+
+def p_define_block(p):
+    '''define_block : DEFINE VARIABLE type SEMICOLON define_block
+                    | empty'''
+    pass
+
+def p_enum_block(p):
+    '''enum_block : ENUM LBRACES enum_values RBRACES'''
+    pass
+
+def p_struct_block(p):
+    '''struct_block : STRUCT VARIABLE LBRACES struct_values RBRACES'''
+    pass
+
+def p_struct_values(p):
+    '''struct_values : struct_values type VARIABLE SEMICOLON
+                     | empty'''
+    pass
+
 def p_if_else(p):
     '''if_else : IF LPAREN expression RPAREN statement ELSE statement
                | IF LPAREN expression RPAREN statement'''
@@ -39,31 +62,9 @@ def p_default(p):
     pass
 
 def p_expression(p):
-    '''expression : expression PLUS expression
-                  | expression MINUS expression
-                  | expression TIMES expression
-                  | expression DIVIDE expression
-                  | expression POWER expression
-                  | expression LT expression
-                  | expression LE expression
-                  | expression GT expression
-                  | expression GE expression
-                  | expression NE expression
-                  | expression EQUIVALENT expression
-                  | expression AND expression
-                  | expression PLUSPLUS
-                  | expression MINUSMINUS
-                  | expression PERCENT
-                  | expression RARROW
-                  | expression LARROW
-                  | expression ENDERECO
+    '''expression : expression operator expression
                   | LPAREN expression RPAREN
-                  | INTEGER
-                  | FLOAT
-                  | BOOLEAN
-                  | CHAR
-                  | STRING
-                  | VARIABLE'''
+                  | constant'''
     pass
 
 def p_empty(p):
@@ -72,6 +73,76 @@ def p_empty(p):
 
 def p_error(p):
     print(f"Syntax error at {p.value!r}")
+
+def p_type(p):
+    '''type : AUTO_TYPE
+            | BOOLEAN_TYPE
+            | CHAR_TYPE
+            | DOUBLE_TYPE
+            | FLOAT_TYPE
+            | INT_TYPE
+            | LONG_TYPE
+            | SIGNED_TYPE
+            | SHORT_TYPE
+            | STRING_TYPE
+            | UNSIGNED_TYPE
+            | VOID
+            '''
+    
+def p_constant(p):
+    '''constant : BOOLEAN
+                | CHAR
+                | FLOAT
+                | INTEGER
+                | NULL
+                | STRING
+    '''
+
+def p_function(p):
+    '''function : type VARIABLE LPAREN parameters RPAREN LBRACES statement RBRACES'''
+
+def p_parameters(p):
+    '''parameters : type VARIABLE COMMA parameters
+                  | type VARIABLE
+                  | empty'''
+
+def p_statement(p):
+    '''statement : statement
+                 | empty'''
+
+def p_operators(p):
+    '''operators : AND
+                 | COLON
+                 | COMMA
+                 | COMMENT
+                 | DIVIDE
+                 | DOT
+                 | ENDERECO
+                 | EQUALS
+                 | EQUIVALENT
+                 | GE
+                 | GT
+                 | LARROW
+                 | LBRACES
+                 | LE
+                 | LPAREN
+                 | LSBRACES
+                 | LT
+                 | MINUS
+                 | MINUSMINUS
+                 | NE
+                 | PERCENT
+                 | PLUS
+                 | PLUSPLUS
+                 | POWER
+                 | RARROW
+                 | RBRACES
+                 | RPAREN
+                 | RSBRACES
+                 | SEMICOLON
+                 | SHARP
+                 | TIMES
+    '''
 
 parser = yacc.yacc()
 

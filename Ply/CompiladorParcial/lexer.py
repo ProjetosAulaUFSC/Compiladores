@@ -1,50 +1,49 @@
 from ply import lex
 
 reserved = {
-    'break': 'BREAK',
-    'case': 'CASE',
-    'class': 'CLASS',
+    'break'   : 'BREAK',
+    'case'    : 'CASE',
     'continue': 'CONTINUE',
-    'default': 'DEFAULT',
-    'do': 'DO',
-    'else': 'ELSE',
-    'enum': 'ENUM',
-    'extern': 'EXTERN',
-    'for': 'FOR',
-    'goto': 'GOTO',
-    'if': 'IF',
-    'return': 'RETURN',
-    'struct': 'STRUCT',
-    'switch': 'SWITCH',
-    'typedef': 'TYPEDEF',
-    'union': 'UNION',
+    'default' : 'DEFAULT',
+    'do'      : 'DO',
+    'else'    : 'ELSE',
+    'enum'    : 'ENUM',
+    'extern'  : 'EXTERN',
+    'for'     : 'FOR',
+    'goto'    : 'GOTO',
+    'if'      : 'IF',
+    'return'  : 'RETURN',
+    'struct'  : 'STRUCT',
+    'switch'  : 'SWITCH',
+    'typedef' : 'TYPEDEF',
+    'union'   : 'UNION',
     'volatile': 'VOLATILE',
-    'while': 'WHILE',
-    'auto': 'AUTO_TYPE',
-    'bool': 'BOOLEAN_TYPE',
-    'char': 'CHAR_TYPE',
-    'const': 'CONST',
-    'double': 'DOUBLE_TYPE',
-    'float': 'FLOAT_TYPE',
-    'int': 'INT_TYPE',
-    'NULL': 'NULL',
-    'long': 'LONG_TYPE',
-    'short': 'SHORT_TYPE',
-    'signed': 'SIGNED_TYPE',
-    'static': 'STATIC',
-    'string': 'STRING_TYPE',
+    'while'   : 'WHILE',
+    'auto'    : 'AUTO_TYPE',
+    'bool'    : 'BOOLEAN_TYPE',
+    'char'    : 'CHAR_TYPE',
+    'const'   : 'CONST',
+    'double'  : 'DOUBLE_TYPE',
+    'float'   : 'FLOAT_TYPE',
+    'int'     : 'INT_TYPE',
+    'NULL'    : 'NULL',
+    'long'    : 'LONG_TYPE',
+    'short'   : 'SHORT_TYPE',
+    'signed'  : 'SIGNED_TYPE',
+    'static'  : 'STATIC',
+    'string'  : 'STRING_TYPE',
     'unsigned': 'UNSIGNED_TYPE',
-    'void': 'VOID_TYPE',
+    'void'    : 'VOID',
 }
 
 tokens = [
-    'EQUALS', 'PLUS', 'MINUS', 'TIMES', 'POWER', 'DIVIDE',
-    'LPAREN', 'RPAREN', 'LT', 'LE', 'GT', 'GE', 'NE', 'DEFINE',
-    'COMMA', 'INTEGER', 'FLOAT', 'STRING', 'VARIABLE',
-    'SEMICOLON', 'RBRACES', 'LBRACES', 'LSBRACES', 'FORMAT_SPECIFIER',
-    'RSBRACES', 'DOT', 'ENDERECO', 'NOT', 'EQUIVALENT', 'COMMENT',
-    'PLUSPLUS', 'MINUSMINUS', 'RARROW', 'LARROW', 'PERCENT', 'INCLUDE',
-    'SHARP', 'AND', 'BOOLEAN', 'HEADER', 'CHAR', 'COLON'
+    'AND', 'BOOLEAN', 'CHAR', 'COLON', 'COMMA', 'COMMENT', 'DEFINE', 'DIVIDE', 
+    'DOT', 'ENDERECO', 'EQUALS', 'EQUIVALENT', 'FLOAT', 'FORMAT_SPECIFIER', 
+    'GE', 'GT', 'HEADER', 'INCLUDE', 'INTEGER', 'LARROW', 'LBRACES', 'LE', 
+    'LPAREN', 'LSBRACES', 'LT', 'MINUS', 'MINUSMINUS', 'NE', 'NOT', 'OR', 
+    'PERCENT', 'PLUS', 'PLUSPLUS', 'POWER', 'RARROW', 'RBRACES', 'RPAREN', 
+    'RSBRACES', 'SEMICOLON', 'SHARP', 'STRING', 'TIMES', 'VARIABLE'
+
 ] + list(reserved.values())
 
 t_ignore = ' \t\n'
@@ -74,6 +73,7 @@ t_DOT = r'\.'
 t_COLON = r':'
 t_ENDERECO = r'&'
 t_AND = r'&&'
+t_OR = r'\|\|'
 t_SHARP = r'\#'
 t_PLUSPLUS = r'\+\+'
 t_MINUSMINUS = r'--'
