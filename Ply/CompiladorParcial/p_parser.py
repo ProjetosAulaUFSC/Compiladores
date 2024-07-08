@@ -62,25 +62,33 @@ def p_statement_block(p):
     pass
 
 def p_statement(p):
-    '''statement : if_else
-                 | for
-                 | while
+    '''statement : declaration
+                 | if_else
+                 | for_loop
+                 | while_loop
                  | do_while
                  | switch
                  | expression SEMICOLON'''
     pass
 
+def p_declaration(p):
+    '''declaration : type VARIABLE EQUALS expression SEMICOLON
+                   | type VARIABLE SEMICOLON'''
+    pass
+
 def p_if_else(p):
-    '''if_else : IF LPAREN expression RPAREN statement ELSE statement
-               | IF LPAREN expression RPAREN statement'''
+    '''if_else : IF LPAREN expression RPAREN LBRACES statement_block RBRACES if_else
+               | IF LPAREN expression RPAREN statement if_else
+               | ELSE statement
+               | ELSE LBRACES statement RBRACES'''
     pass
 
-def p_for(p):
-    '''for : FOR LPAREN expression SEMICOLON expression SEMICOLON expression RPAREN statement'''
+def p_for_loop(p):
+    '''for_loop : FOR LPAREN declaration expression SEMICOLON expression RPAREN statement'''
     pass
 
-def p_while(p):
-    '''while : WHILE LPAREN expression RPAREN statement'''
+def p_while_loop(p):
+    '''while_loop : WHILE LPAREN expression RPAREN statement'''
     pass
 
 def p_do_while(p):
@@ -98,18 +106,17 @@ def p_cases(p):
     pass
 
 def p_case(p):
-    '''case : CASE expression COLON statement SEMICOLON BREAK SEMICOLON'''
+    '''case : CASE expression COLON statement_block BREAK SEMICOLON'''
     pass
 
 def p_default(p):
-    '''default : DEFAULT COLON statement'''
+    '''default : DEFAULT COLON statement_block'''
     pass
 
 def p_expression(p):
     '''expression : expression operator expression
                   | LPAREN expression RPAREN
                   | constant
-                  | COMMENT
                   | VARIABLE'''
     pass
 
@@ -118,6 +125,7 @@ def p_operator(p):
                 | MINUS
                 | TIMES
                 | DIVIDE
+                | EQUALS
                 | POWER
                 | LT
                 | LE
@@ -126,11 +134,13 @@ def p_operator(p):
                 | NE
                 | EQUIVALENT
                 | AND
+                | OR
                 | PLUSPLUS
                 | MINUSMINUS
                 | PERCENT
                 | RARROW
                 | LARROW
+                | SEMICOLON
                 | ENDERECO'''
     pass
 
@@ -139,8 +149,8 @@ def p_constant(p):
                 | CHAR
                 | FLOAT
                 | INTEGER
-                | NULL
-                | STRING'''
+                | STRING
+                | NULL'''
     pass
 
 def p_type(p):
@@ -165,6 +175,11 @@ def p_empty(p):
 def p_error(p):
     print(f"Syntax error at {p.value!r}")
 
+def p_array(p):
+    '''array : LSBRACES INTEGER RSBRACES array
+             | empty'''
+    pass
+
 parser = yacc.yacc()
 
 if __name__ == "__main__":
@@ -179,3 +194,4 @@ if __name__ == "__main__":
         with open(sys.argv[1], 'r') as file:
             data = file.read()
         parser.parse(data, debug=logging.getLogger())
+        print("Programa compilado com sucesso!")

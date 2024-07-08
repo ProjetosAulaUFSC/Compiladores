@@ -1,5 +1,5 @@
 from lexer import lexer
-from p_parser import parser
+from Ply.CompiladorParcial.p_parser import parser
 
 if __name__ == "__main__":
     import sys
