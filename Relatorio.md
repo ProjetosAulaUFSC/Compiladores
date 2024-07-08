@@ -32,4 +32,4 @@ Pretendo continuar o desenvolvimento do projeto para resolver os problemas sint�
 
 O progresso e a vers찾o final do projeto ser찾o disponibilizados no seguinte reposit처rio do GitHub:
 
-[Link para o Reposit처rio do GitHub](link_github)
+[Link para o Reposit처rio do GitHub](https://github.com/ProjetosAulaUFSC/Compiladores)
